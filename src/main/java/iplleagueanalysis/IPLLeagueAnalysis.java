@@ -65,7 +65,7 @@ public class IPLLeagueAnalysis
 		}
 		
 		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.avg);
-		this.sortRunsData(runsList, runsComparator);
+		this.sortData(runsList, runsComparator);
 		String sortedRunsJson = new Gson().toJson(runsList);
 		return sortedRunsJson;
 	}
@@ -79,7 +79,7 @@ public class IPLLeagueAnalysis
 		}
 		
 		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.sr);
-		this.sortRunsData(runsList, runsComparator);
+		this.sortData(runsList, runsComparator);
 		String sortedRunsJson = new Gson().toJson(runsList);
 		return sortedRunsJson;
 	}
@@ -93,7 +93,7 @@ public class IPLLeagueAnalysis
 		}
 		
 		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.fours + data.sixes);
-		this.sortRunsData(runsList, runsComparator);
+		this.sortData(runsList, runsComparator);
 		String sortedRunsJson = new Gson().toJson(runsList);
 		return sortedRunsJson;
 	}
@@ -134,11 +134,11 @@ public class IPLLeagueAnalysis
 		}
 		
 		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.avg);
-		this.sortRunsData(runsList, runsComparator);
+		this.sortData(runsList, runsComparator);
 		
 		List<FactsheetMostRuns> tempList = runsList.stream().limit(10).collect(Collectors.toList());
 		
-		this.sortRunsData(tempList, Comparator.comparing(data -> data.sr));
+		this.sortData(tempList, Comparator.comparing(data -> data.sr));
 		
 		String sortedRunsJson = new Gson().toJson(tempList);
 		return sortedRunsJson;
@@ -153,17 +153,17 @@ public class IPLLeagueAnalysis
 		}
 		
 		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.runs);
-		this.sortRunsData(runsList, runsComparator);
+		this.sortData(runsList, runsComparator);
 		
 		List<FactsheetMostRuns> tempList = runsList.stream().limit(10).collect(Collectors.toList());
 		
-		this.sortRunsData(tempList, Comparator.comparing(data -> data.avg));
+		this.sortData(tempList, Comparator.comparing(data -> data.avg));
 		
 		String sortedRunsJson = new Gson().toJson(tempList);
 		return sortedRunsJson;
 	}
 	
-	private <E> void sortRunsData(List<E> list,Comparator<E> runsComparator) 
+	private <E> void sortData(List<E> list,Comparator<E> runsComparator) 
 	{
 		for (int i = 0; i < list.size()-1; i++) 
 		{	
