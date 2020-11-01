@@ -171,4 +171,21 @@ public class IPLLeagueAnalysisTest
 					e.printStackTrace();
 		}
 	}
+	
+	//uc10
+	@Test
+	public void givenWktsCSVFile_WhenSortedOnStrikeRate5w4w_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadWktsData(FILE_PATH_WKTS);
+			String sortedWktsData = iplLeagueAnalysis.getSR5w4wWiseSortedWktsData();
+			FactsheetMostWkts[] wktsCSV = new Gson().fromJson(sortedWktsData, FactsheetMostWkts[].class);
+			assertEquals("Alzarri Joseph", wktsCSV[0].player);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
 }
