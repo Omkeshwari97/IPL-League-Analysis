@@ -104,4 +104,21 @@ public class IPLLeagueAnalysisTest
 		}
 	}
 	
+	//uc6
+	@Test
+	public void givenRunsCSVFile_WhenSortedOnMaxRunsAndBestAvg_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.geMAxRunsBestAvgWiseSortedCensusData(FILE_PATH_RUNS);
+			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
+			assertEquals("David Warner", runsCSV[0].player);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
+	
 }

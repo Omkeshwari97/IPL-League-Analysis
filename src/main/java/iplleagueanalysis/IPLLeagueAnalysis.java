@@ -144,6 +144,25 @@ public class IPLLeagueAnalysis
 		return sortedRunsJson;
 	}
 	
+	//uc6
+	public String geMAxRunsBestAvgWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
+	{
+		if(runsList == null || runsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+		
+		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.runs);
+		this.sortRunsData(runsList, runsComparator);
+		
+		List<FactsheetMostRuns> tempList = runsList.stream().limit(10).collect(Collectors.toList());
+		
+		this.sortRunsData(tempList, Comparator.comparing(data -> data.avg));
+		
+		String sortedRunsJson = new Gson().toJson(tempList);
+		return sortedRunsJson;
+	}
+	
 	private <E> void sortRunsData(List<E> list,Comparator<E> runsComparator) 
 	{
 		for (int i = 0; i < list.size()-1; i++) 
