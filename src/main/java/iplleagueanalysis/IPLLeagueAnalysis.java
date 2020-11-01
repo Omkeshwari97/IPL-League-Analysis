@@ -295,6 +295,30 @@ public class IPLLeagueAnalysis
 		return playerJson;
 	}
 	
+	//uc14
+	public String getRunsAndWicketsWiseSortedData() throws IPLLeagueAnalyserException 
+	{
+		if(wktsList == null || wktsList.size() == 0 || runsList == null || runsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+		
+		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.runs);
+		this.sortData(runsList, runsComparator);
+		List<FactsheetMostRuns> tempRunsList = runsList.stream().limit(50).collect(Collectors.toList());
+		
+		wktsList.removeIf(data -> data.avg ==0);
+		Comparator<FactsheetMostWkts> wktsComparator = Comparator.comparing(data -> data.wkts);
+		this.sortData(wktsList, wktsComparator);
+		List<FactsheetMostWkts> tempWktsList = wktsList.stream().limit(50).collect(Collectors.toList());
+		
+		List<String> playerList = this.getAllRounderSortedList(tempRunsList, tempWktsList);
+				
+		String playerJson = new Gson().toJson(playerList);
+		
+		return playerJson;
+	}
+	
 	private <E> void sortData(List<E> list,Comparator<E> runsComparator) 
 	{
 		for (int i = 0; i < list.size()-1; i++) 

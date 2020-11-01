@@ -239,5 +239,24 @@ public class IPLLeagueAnalysisTest
 		{
 					e.printStackTrace();
 		}
-	}	
+	}
+	
+	//uc14
+	@Test
+	public void givenRunsAndWktsCSVFile_WhenSortedOnRunsAndWickets_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
+			iplLeagueAnalysis.loadWktsData(FILE_PATH_WKTS);
+			String playerData = iplLeagueAnalysis.getRunsAndWicketsWiseSortedData();
+			String[] player = new Gson().fromJson(playerData, String[].class);
+			assertEquals("Andre Russell", player[0]);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
+	
 }
