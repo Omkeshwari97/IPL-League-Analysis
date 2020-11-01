@@ -340,6 +340,21 @@ public class IPLLeagueAnalysis
 		return sortedRunsJson;
 	}	
 	
+	//uc16
+	public String getZero100s50sAndBattingAvgWiseSortedData() throws IPLLeagueAnalyserException 
+	{
+		if(runsList == null || runsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+				
+		runsList.removeIf(data -> (data.hundreds + data.fifties) != 0);
+		this.sortData(runsList, Comparator.comparing(data -> data.avg));
+		
+		String sortedRunsJson = new Gson().toJson(runsList);
+		return sortedRunsJson;
+	}
+	
 	private <E> void sortData(List<E> list,Comparator<E> runsComparator) 
 	{
 		for (int i = 0; i < list.size()-1; i++) 

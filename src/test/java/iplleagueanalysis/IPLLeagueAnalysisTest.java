@@ -276,4 +276,21 @@ public class IPLLeagueAnalysisTest
 					e.printStackTrace();
 		}
 	}
+	
+	//uc16
+	@Test
+	public void givenRunCSVFile_WhenSortedOnXero100s50sAndBattingAvg_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.getZero100s50sAndBattingAvgWiseSortedData();
+			FactsheetMostRuns[] runsCsv = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
+			assertEquals("Marcus Stoinis", runsCsv[0].player);	
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
 }
