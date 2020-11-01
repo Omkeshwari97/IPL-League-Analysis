@@ -51,4 +51,20 @@ public class IPLLeagueAnalysisTest
 					e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void givenRunsCSVFile_WhenSortedOnFourSixes_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.getFoursSixesWiseSortedCensusData(FILE_PATH_RUNS);
+			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
+			assertEquals("Andre Russell", runsCSV[0].player);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
 }

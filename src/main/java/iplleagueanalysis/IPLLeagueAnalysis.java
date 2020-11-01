@@ -81,6 +81,19 @@ public class IPLLeagueAnalysis
 		return sortedRunsJson;
 	}
 	
+	public String getFoursSixesWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
+	{
+		if(runsList == null || runsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+		
+		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.fours + data.sixes);
+		this.sortRunsData(runsComparator);
+		String sortedRunsJson = new Gson().toJson(runsList);
+		return sortedRunsJson;
+	}
+	
 	private void sortRunsData(Comparator<FactsheetMostRuns> runsComparator) 
 	{
 		for (int i = 0; i < runsList.size()-1; i++) 
@@ -98,6 +111,5 @@ public class IPLLeagueAnalysis
             }
 		}
 	}
-
 	
 }
