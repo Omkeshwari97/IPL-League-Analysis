@@ -120,4 +120,21 @@ public class IPLLeagueAnalysisTest
 					e.printStackTrace();
 		}
 	}
+	
+	//uc7
+	@Test
+	public void givenWktsCSVFile_WhenSortedOnBowlingAvg_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadWktsData(FILE_PATH_WKTS);
+			String sortedWktsData = iplLeagueAnalysis.getAvgWiseSortedWktsData();
+			FactsheetMostWkts[] wktsCSV = new Gson().fromJson(sortedWktsData, FactsheetMostWkts[].class);
+			assertEquals("Anukul Roy", wktsCSV[0].player);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
 }

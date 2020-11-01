@@ -163,6 +163,21 @@ public class IPLLeagueAnalysis
 		return sortedRunsJson;
 	}
 	
+	public String getAvgWiseSortedWktsData() throws IPLLeagueAnalyserException 
+	{
+		if(wktsList == null || wktsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+		
+		wktsList.removeIf(data -> data.avg == 0);
+		
+		Comparator<FactsheetMostWkts> wktsComparator = Comparator.comparing(data -> data.avg, Comparator.reverseOrder());
+		this.sortData(wktsList, wktsComparator);
+		String sortedWktsJson = new Gson().toJson(wktsList);
+		return sortedWktsJson;
+	}
+	
 	private <E> void sortData(List<E> list,Comparator<E> runsComparator) 
 	{
 		for (int i = 0; i < list.size()-1; i++) 
