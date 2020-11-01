@@ -205,4 +205,21 @@ public class IPLLeagueAnalysisTest
 					e.printStackTrace();
 		}
 	}
+	
+	//uc12
+	@Test
+	public void givenWktsCSVFile_WhenSortedOnWicketsAndAvg_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadWktsData(FILE_PATH_WKTS);
+			String sortedWktsData = iplLeagueAnalysis.getWicketsAndAverageWiseSortedWktsData();
+			FactsheetMostWkts[] wktsCSV = new Gson().fromJson(sortedWktsData, FactsheetMostWkts[].class);
+			assertEquals("Imran Tahir", wktsCSV[0].player);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
 }
