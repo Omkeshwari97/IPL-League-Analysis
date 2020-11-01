@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
-
 import IPLJar.CSVBuilderException;
 import IPLJar.CSVBuilderFactory;
 import IPLJar.ICSVBuilder;
@@ -251,6 +251,7 @@ public class IPLLeagueAnalysis
 		return sortedWktsJson;
 	}
 	
+	//uc12
 	public String getWicketsAndAverageWiseSortedWktsData() throws IPLLeagueAnalyserException 
 	{
 		if(wktsList == null || wktsList.size() == 0)
@@ -268,6 +269,39 @@ public class IPLLeagueAnalysis
 				
 		String sortedWktsJson = new Gson().toJson(wktsList);
 		return sortedWktsJson;
+	}
+	
+	public String getBattingAvgBowlingAvgWiseSortedData() throws IPLLeagueAnalyserException 
+	{
+		if(wktsList == null || wktsList.size() == 0 || runsList == null || runsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+		
+		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.avg);
+		this.sortData(runsList, runsComparator);
+		List<FactsheetMostRuns> tempRunsList = runsList.stream().limit(50).collect(Collectors.toList());
+		
+		wktsList.removeIf(data -> data.avg ==0);
+		Comparator<FactsheetMostWkts> wktsComparator = Comparator.comparing(data -> data.wkts);
+		this.sortData(wktsList, wktsComparator);
+		List<FactsheetMostWkts> tempWktsList = wktsList.stream().limit(50).collect(Collectors.toList());
+		
+		List<String> playerList = new ArrayList<String>();
+		for(FactsheetMostRuns runsObj : tempRunsList)
+		{
+			for(FactsheetMostWkts wktsObj : tempWktsList)
+			{
+				if(runsObj.player.equals(wktsObj.player))
+				{
+					playerList.add(runsObj.player);
+				}
+			}
+		}
+				
+		String playerJson = new Gson().toJson(playerList);
+		
+		return playerJson;
 	}
 	
 	private <E> void sortData(List<E> list,Comparator<E> runsComparator) 

@@ -222,4 +222,22 @@ public class IPLLeagueAnalysisTest
 					e.printStackTrace();
 		}
 	}
+	
+	//uc13
+	@Test
+	public void givenRunsAndWktsCSVFile_WhenSortedOnBattingSAvgBowlingAvg_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
+			iplLeagueAnalysis.loadWktsData(FILE_PATH_WKTS);
+			String playerData = iplLeagueAnalysis.getBattingAvgBowlingAvgWiseSortedData();
+			String[] player = new Gson().fromJson(playerData, String[].class);
+			assertEquals("Andre Russell", player[0]);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
 }
