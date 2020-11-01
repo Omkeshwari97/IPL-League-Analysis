@@ -55,6 +55,7 @@ public class IPLLeagueAnalysis
 		}
 	}
 
+	//uc1
 	public String getAvgWiseSortedCensusData(String filePath) throws IPLLeagueAnalyserException 
 	{
 		if(runsList == null || runsList.size() == 0)
@@ -68,6 +69,7 @@ public class IPLLeagueAnalysis
 		return sortedRunsJson;
 	}
 
+	//uc2
 	public String getStrikeRateWiseSortedCensusData(String filePath) throws IPLLeagueAnalyserException 
 	{
 		if(runsList == null || runsList.size() == 0)
@@ -81,6 +83,7 @@ public class IPLLeagueAnalysis
 		return sortedRunsJson;
 	}
 	
+	//uc3
 	public String getFoursSixesWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
 	{
 		if(runsList == null || runsList.size() == 0)
@@ -92,6 +95,33 @@ public class IPLLeagueAnalysis
 		this.sortRunsData(runsComparator);
 		String sortedRunsJson = new Gson().toJson(runsList);
 		return sortedRunsJson;
+	}
+	
+	//uc4
+	public String getSROnFoursSixesWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
+	{
+		double max = 0, temp = 0;
+		double maxSR = 0, tempSR = 0;
+		String name = null;
+		
+		if(runsList == null || runsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+
+		for (int i = 0; i < runsList.size(); i++) 
+		{
+			temp = (runsList.get(i).fours * 4 + runsList.get(i).sixes * 6);
+			tempSR = temp / runsList.get(i).bf;
+			if (temp > max && tempSR > maxSR) 
+			{
+				max = temp;
+				maxSR = tempSR;
+				name = runsList.get(i).player;
+
+			}
+		}
+		return name;
 	}
 	
 	private void sortRunsData(Comparator<FactsheetMostRuns> runsComparator) 
@@ -111,5 +141,4 @@ public class IPLLeagueAnalysis
             }
 		}
 	}
-	
 }

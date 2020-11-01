@@ -20,6 +20,7 @@ public class IPLLeagueAnalysisTest
 		iplLeagueAnalysis = new IPLLeagueAnalysis();
 	}
 	
+	//uc1
 	@Test
 	public void givenRunsCSVFile_WhenSortedOnBattingAvg_ShouldReturnTopDesiredPlayer()
 	{
@@ -36,6 +37,7 @@ public class IPLLeagueAnalysisTest
 		}
 	}
 	
+	//uc2
 	@Test
 	public void givenRunsCSVFile_WhenSortedOnStrikeRate_ShouldReturnTopDesiredPlayer()
 	{
@@ -52,6 +54,7 @@ public class IPLLeagueAnalysisTest
 		}
 	}
 	
+	//uc3
 	@Test
 	public void givenRunsCSVFile_WhenSortedOnFourSixes_ShouldReturnTopDesiredPlayer()
 	{
@@ -61,6 +64,22 @@ public class IPLLeagueAnalysisTest
 			String sortedRunsData = iplLeagueAnalysis.getFoursSixesWiseSortedCensusData(FILE_PATH_RUNS);
 			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
 			assertEquals("Andre Russell", runsCSV[0].player);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
+	
+	//uc4
+	@Test
+	public void givenRunsCSVFile_WhenSortedOnSROnFourSixes_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
+			String player = iplLeagueAnalysis.getSROnFoursSixesWiseSortedCensusData(FILE_PATH_RUNS);
+			assertEquals("Andre Russell", player);
 		}
 		catch (IPLLeagueAnalyserException e) 
 		{
