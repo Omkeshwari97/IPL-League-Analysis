@@ -113,7 +113,7 @@ public class IPLLeagueAnalysisTest
 			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
 			String sortedRunsData = iplLeagueAnalysis.geMAxRunsBestAvgWiseSortedRunsData();
 			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
-			assertEquals("David Warner ", runsCSV[0].player);
+			assertEquals("David Warner", runsCSV[0].player);
 		}
 		catch (IPLLeagueAnalyserException e) 
 		{
@@ -259,4 +259,21 @@ public class IPLLeagueAnalysisTest
 		}
 	}
 	
+	//uc15
+	@Test
+	public void givenRunCSVFile_WhenSortedOn100sAndBattingAvg_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.get100sAndBattingAvgWiseSortedData();
+			FactsheetMostRuns[] runsCsv = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
+			assertEquals("David Warner", runsCsv[0].player);
+			assertEquals("Jonny Bairstow", runsCsv[1].player);			
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
 }

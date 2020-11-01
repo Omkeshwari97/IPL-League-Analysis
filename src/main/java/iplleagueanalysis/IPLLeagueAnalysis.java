@@ -318,6 +318,27 @@ public class IPLLeagueAnalysis
 		
 		return playerJson;
 	}
+
+	//uc15
+	public String get100sAndBattingAvgWiseSortedData() throws IPLLeagueAnalyserException 
+	{
+		if(runsList == null || runsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+		
+		runsList.removeIf(data -> data.hundreds == 0);
+		
+		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.hundreds);
+		this.sortData(runsList, runsComparator);
+		
+		List<FactsheetMostRuns> tempList = runsList.stream().limit(10).collect(Collectors.toList());
+		
+		this.sortData(tempList, Comparator.comparing(data -> data.avg));
+		
+		String sortedRunsJson = new Gson().toJson(tempList);
+		return sortedRunsJson;
+	}	
 	
 	private <E> void sortData(List<E> list,Comparator<E> runsComparator) 
 	{
@@ -352,5 +373,6 @@ public class IPLLeagueAnalysis
 		}
 		return playerList;
 	}
+
 }
 
