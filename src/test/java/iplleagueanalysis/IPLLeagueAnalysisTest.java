@@ -21,7 +21,7 @@ public class IPLLeagueAnalysisTest
 	}
 	
 	@Test
-	public void givenRunsCSVFile_WhenSortedOnBattingAvg_ShouldReturnTopBattingAvg()
+	public void givenRunsCSVFile_WhenSortedOnBattingAvg_ShouldReturnTopDesiredPlayer()
 	{
 		try 
 		{
@@ -29,6 +29,22 @@ public class IPLLeagueAnalysisTest
 			String sortedRunsData = iplLeagueAnalysis.getAvgWiseSortedCensusData(FILE_PATH_RUNS);
 			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
 			assertEquals("MS Dhoni", runsCSV[0].player);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void givenRunsCSVFile_WhenSortedOnStrikeRate_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.getStrikeRateWiseSortedCensusData(FILE_PATH_RUNS);
+			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
+			assertEquals("Ishant Sharma", runsCSV[0].player);
 		}
 		catch (IPLLeagueAnalyserException e) 
 		{
