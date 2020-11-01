@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
@@ -64,7 +65,7 @@ public class IPLLeagueAnalysis
 		}
 		
 		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.avg);
-		this.sortRunsData(runsComparator);
+		this.sortRunsData(runsList, runsComparator);
 		String sortedRunsJson = new Gson().toJson(runsList);
 		return sortedRunsJson;
 	}
@@ -78,7 +79,7 @@ public class IPLLeagueAnalysis
 		}
 		
 		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.sr);
-		this.sortRunsData(runsComparator);
+		this.sortRunsData(runsList, runsComparator);
 		String sortedRunsJson = new Gson().toJson(runsList);
 		return sortedRunsJson;
 	}
@@ -92,7 +93,7 @@ public class IPLLeagueAnalysis
 		}
 		
 		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.fours + data.sixes);
-		this.sortRunsData(runsComparator);
+		this.sortRunsData(runsList, runsComparator);
 		String sortedRunsJson = new Gson().toJson(runsList);
 		return sortedRunsJson;
 	}
@@ -124,19 +125,38 @@ public class IPLLeagueAnalysis
 		return name;
 	}
 	
-	private void sortRunsData(Comparator<FactsheetMostRuns> runsComparator) 
+	//uc5
+	public String geStrikeRateAvgWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
 	{
-		for (int i = 0; i < runsList.size()-1; i++) 
+		if(runsList == null || runsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+		
+		Comparator<FactsheetMostRuns> runsComparator = Comparator.comparing(data -> data.avg);
+		this.sortRunsData(runsList, runsComparator);
+		
+		List<FactsheetMostRuns> tempList = runsList.stream().limit(10).collect(Collectors.toList());
+		
+		this.sortRunsData(tempList, Comparator.comparing(data -> data.sr));
+		
+		String sortedRunsJson = new Gson().toJson(tempList);
+		return sortedRunsJson;
+	}
+	
+	private <E> void sortRunsData(List<E> list,Comparator<E> runsComparator) 
+	{
+		for (int i = 0; i < list.size()-1; i++) 
 		{	
-            for (int j = 0; j < runsList.size()-i-1; j++) 
+            for (int j = 0; j < list.size()-i-1; j++) 
             {
-            	FactsheetMostRuns data1 = runsList.get(j);
-            	FactsheetMostRuns data2 = runsList.get(j+1);
+            	E data1 = list.get(j);
+            	E data2 = list.get(j+1);
             	
                 if (runsComparator.compare(data1, data2) < 0) 
                 { 
-                	runsList.set(j, data2);
-                	runsList.set(j+1, data1);
+                	list.set(j, data2);
+                	list.set(j+1, data1);
                 } 
             }
 		}

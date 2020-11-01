@@ -29,5 +29,19 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="src" path="/IPLJar"/>
+	<classpathentry kind="lib" path="C:/Users/omkes/.m2/repository/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar" sourcepath="C:/Users/omkes/.m2/repository/com/google/code/gson/gson/2.8.0/gson-2.8.0-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="com.google.code.gson"/>
+			<attribute name="maven.artifactId" value="gson"/>
+			<attribute name="maven.version" value="2.8.0"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/omkes/.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/5.2/f1bc9e33b264feb31418b58d1a2d3f82a280dfb1/opencsv-5.2.jar" sourcepath="C:/Users/omkes/.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/5.2/42bd9066147f31f2367a7003b876076797cc0785/opencsv-5.2-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>
