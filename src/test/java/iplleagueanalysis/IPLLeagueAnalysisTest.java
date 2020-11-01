@@ -27,7 +27,7 @@ public class IPLLeagueAnalysisTest
 		try 
 		{
 			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
-			String sortedRunsData = iplLeagueAnalysis.getAvgWiseSortedCensusData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.getAvgWiseSortedRunsData();
 			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
 			assertEquals("MS Dhoni", runsCSV[0].player);
 		}
@@ -44,7 +44,7 @@ public class IPLLeagueAnalysisTest
 		try 
 		{
 			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
-			String sortedRunsData = iplLeagueAnalysis.getStrikeRateWiseSortedCensusData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.getStrikeRateWiseSortedRunsData();
 			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
 			assertEquals("Ishant Sharma", runsCSV[0].player);
 		}
@@ -61,7 +61,7 @@ public class IPLLeagueAnalysisTest
 		try 
 		{
 			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
-			String sortedRunsData = iplLeagueAnalysis.getFoursSixesWiseSortedCensusData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.getFoursSixesWiseSortedRunsData();
 			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
 			assertEquals("Andre Russell", runsCSV[0].player);
 		}
@@ -78,7 +78,7 @@ public class IPLLeagueAnalysisTest
 		try 
 		{
 			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
-			String player = iplLeagueAnalysis.getSROnFoursSixesWiseSortedCensusData(FILE_PATH_RUNS);
+			String player = iplLeagueAnalysis.getSROnFoursSixesWiseSortedRunsData();
 			assertEquals("Andre Russell", player);
 		}
 		catch (IPLLeagueAnalyserException e) 
@@ -94,7 +94,7 @@ public class IPLLeagueAnalysisTest
 		try 
 		{
 			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
-			String sortedRunsData = iplLeagueAnalysis.geStrikeRateAvgWiseSortedCensusData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.geStrikeRateAvgWiseSortedRunsData();
 			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
 			assertEquals("Andre Russell", runsCSV[0].player);
 		}
@@ -111,14 +111,13 @@ public class IPLLeagueAnalysisTest
 		try 
 		{
 			iplLeagueAnalysis.loadRunsData(FILE_PATH_RUNS);
-			String sortedRunsData = iplLeagueAnalysis.geMAxRunsBestAvgWiseSortedCensusData(FILE_PATH_RUNS);
+			String sortedRunsData = iplLeagueAnalysis.geMAxRunsBestAvgWiseSortedRunsData();
 			FactsheetMostRuns[] runsCSV = new Gson().fromJson(sortedRunsData, FactsheetMostRuns[].class);
-			assertEquals("David Warner", runsCSV[0].player);
+			assertEquals("David Warner ", runsCSV[0].player);
 		}
 		catch (IPLLeagueAnalyserException e) 
 		{
 					e.printStackTrace();
 		}
 	}
-	
 }

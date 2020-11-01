@@ -57,7 +57,7 @@ public class IPLLeagueAnalysis
 	}
 
 	//uc1
-	public String getAvgWiseSortedCensusData(String filePath) throws IPLLeagueAnalyserException 
+	public String getAvgWiseSortedRunsData() throws IPLLeagueAnalyserException 
 	{
 		if(runsList == null || runsList.size() == 0)
 		{
@@ -71,7 +71,7 @@ public class IPLLeagueAnalysis
 	}
 
 	//uc2
-	public String getStrikeRateWiseSortedCensusData(String filePath) throws IPLLeagueAnalyserException 
+	public String getStrikeRateWiseSortedRunsData() throws IPLLeagueAnalyserException 
 	{
 		if(runsList == null || runsList.size() == 0)
 		{
@@ -85,7 +85,7 @@ public class IPLLeagueAnalysis
 	}
 	
 	//uc3
-	public String getFoursSixesWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
+	public String getFoursSixesWiseSortedRunsData() throws IPLLeagueAnalyserException 
 	{
 		if(runsList == null || runsList.size() == 0)
 		{
@@ -99,7 +99,7 @@ public class IPLLeagueAnalysis
 	}
 	
 	//uc4
-	public String getSROnFoursSixesWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
+	public String getSROnFoursSixesWiseSortedRunsData() throws IPLLeagueAnalyserException 
 	{
 		double max = 0, temp = 0;
 		double maxSR = 0, tempSR = 0;
@@ -126,7 +126,7 @@ public class IPLLeagueAnalysis
 	}
 	
 	//uc5
-	public String geStrikeRateAvgWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
+	public String geStrikeRateAvgWiseSortedRunsData() throws IPLLeagueAnalyserException 
 	{
 		if(runsList == null || runsList.size() == 0)
 		{
@@ -145,7 +145,7 @@ public class IPLLeagueAnalysis
 	}
 	
 	//uc6
-	public String geMAxRunsBestAvgWiseSortedCensusData(String filePathRuns) throws IPLLeagueAnalyserException 
+	public String geMAxRunsBestAvgWiseSortedRunsData() throws IPLLeagueAnalyserException 
 	{
 		if(runsList == null || runsList.size() == 0)
 		{
