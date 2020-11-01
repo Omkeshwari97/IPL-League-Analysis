@@ -154,4 +154,21 @@ public class IPLLeagueAnalysisTest
 					e.printStackTrace();
 		}
 	}
+
+	//uc9
+	@Test
+	public void givenWktsCSVFile_WhenSortedOnEconomy_ShouldReturnTopDesiredPlayer()
+	{
+		try 
+		{
+			iplLeagueAnalysis.loadWktsData(FILE_PATH_WKTS);
+			String sortedWktsData = iplLeagueAnalysis.getEconomyWiseSortedWktsData();
+			FactsheetMostWkts[] wktsCSV = new Gson().fromJson(sortedWktsData, FactsheetMostWkts[].class);
+			assertEquals("Shivam Dube", wktsCSV[0].player);
+		}
+		catch (IPLLeagueAnalyserException e) 
+		{
+					e.printStackTrace();
+		}
+	}
 }
