@@ -163,6 +163,7 @@ public class IPLLeagueAnalysis
 		return sortedRunsJson;
 	}
 	
+	//uc7
 	public String getAvgWiseSortedWktsData() throws IPLLeagueAnalyserException 
 	{
 		if(wktsList == null || wktsList.size() == 0)
@@ -173,6 +174,22 @@ public class IPLLeagueAnalysis
 		wktsList.removeIf(data -> data.avg == 0);
 		
 		Comparator<FactsheetMostWkts> wktsComparator = Comparator.comparing(data -> data.avg, Comparator.reverseOrder());
+		this.sortData(wktsList, wktsComparator);
+		String sortedWktsJson = new Gson().toJson(wktsList);
+		return sortedWktsJson;
+	}
+	
+	//uc8
+	public String getStrikeRateWiseSortedWktsData() throws IPLLeagueAnalyserException 
+	{
+		if(wktsList == null || wktsList.size() == 0)
+		{
+			throw new IPLLeagueAnalyserException("No census data", ExceptionType.WRONG_STATISTICS_DATA);
+		}
+		
+		wktsList.removeIf(data -> data.sr == 0);
+		
+		Comparator<FactsheetMostWkts> wktsComparator = Comparator.comparing(data -> data.sr, Comparator.reverseOrder());
 		this.sortData(wktsList, wktsComparator);
 		String sortedWktsJson = new Gson().toJson(wktsList);
 		return sortedWktsJson;
