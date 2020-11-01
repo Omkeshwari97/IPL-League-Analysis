@@ -271,6 +271,7 @@ public class IPLLeagueAnalysis
 		return sortedWktsJson;
 	}
 	
+	//uc13
 	public String getBattingAvgBowlingAvgWiseSortedData() throws IPLLeagueAnalyserException 
 	{
 		if(wktsList == null || wktsList.size() == 0 || runsList == null || runsList.size() == 0)
@@ -287,17 +288,7 @@ public class IPLLeagueAnalysis
 		this.sortData(wktsList, wktsComparator);
 		List<FactsheetMostWkts> tempWktsList = wktsList.stream().limit(50).collect(Collectors.toList());
 		
-		List<String> playerList = new ArrayList<String>();
-		for(FactsheetMostRuns runsObj : tempRunsList)
-		{
-			for(FactsheetMostWkts wktsObj : tempWktsList)
-			{
-				if(runsObj.player.equals(wktsObj.player))
-				{
-					playerList.add(runsObj.player);
-				}
-			}
-		}
+		List<String> playerList = this.getAllRounderSortedList(tempRunsList, tempWktsList);
 				
 		String playerJson = new Gson().toJson(playerList);
 		
@@ -321,4 +312,21 @@ public class IPLLeagueAnalysis
             }
 		}
 	}
+	
+	public List<String> getAllRounderSortedList(List<FactsheetMostRuns> tempRunsList, List<FactsheetMostWkts> tempWktsList) 
+	{
+		List<String> playerList = new ArrayList<String>();
+		for(FactsheetMostRuns runsObj : tempRunsList)
+		{
+			for(FactsheetMostWkts wktsObj : tempWktsList)
+			{
+				if(runsObj.player.equals(wktsObj.player))
+				{
+					playerList.add(runsObj.player);
+				}
+			}
+		}
+		return playerList;
+	}
 }
+
